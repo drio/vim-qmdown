@@ -1,9 +1,5 @@
-nnoremap <leader>mh :call markdown_to_html('compile')<CR>
-nnoremap <leader>mo :call markdown_to_html('open')<CR>
-nnoremap <leader>mr :call markdown_to_html('rsync')<CR>
-
 " grip the current file and open it in browser (open)
-function! s:markdown_to_html(task)
+function! QMD_main(task)
   " TODO:
   " - find path to python script dynamically
   " - allow user to set remote and other dynamic vars
@@ -35,3 +31,7 @@ function! s:markdown_to_html(task)
       \ ";scp " . l:html_file . " apu:public_html/markdown/"
   endif
 endfunction
+
+nnoremap <leader>mh :call QMD_main('compile')<CR>
+nnoremap <leader>mo :call QMD_main('open')<CR>
+nnoremap <leader>mr :call QMD_main('rsync')<CR>
