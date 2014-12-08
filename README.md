@@ -40,10 +40,11 @@ Assuming you are using pathoghen and vundle add this to your `.vimrc`:
 Usage
 ---
 
-`<leader>mh` → generate html for current file (a <name>.html will be created)
-`<leader>mo` → generate html and open (fires mac open)
-`<leader>mr` → generate html and sync to remote server.
-  - For this last one you have to set up a remote machine and a remote directory.
-    The markdown will be rsynced there. The plugin expects you have a passwordless
-    setup against that server.
+- `<leader>mh` → generate html for current file (a <name>.html will be created)
+- `<leader>mo` → generate html and open (fires mac open)
+- `<leader>mr` → generate html and sync to remote server.
+
+For this last one you have to set up a remote machine and a remote directory.
+The markdown will be rsynced there. The plugin expects you have a passwordless
+setup against that server.
 
