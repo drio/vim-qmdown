@@ -23,8 +23,7 @@ function! QMD_main(task)
   endif
 
   if a:task == "open"
-    execute l:convert_cmd . ";open " . l:html_file .
-      \ ";echo " . "converter: " . l:converter
+    execute l:convert_cmd . ";open " . l:html_file
   endif
 
   if a:task == "rsync"
