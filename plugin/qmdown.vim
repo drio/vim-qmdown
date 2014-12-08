@@ -1,14 +1,16 @@
+if exists('g:loaded_quickmardown') || &cp
+    finish
+endif
+let g:loaded_quickmardown = 1
+
 " grip the current file and open it in browser (open)
 function! QMD_main(task)
-  " TODO:
-  " - find path to python script dynamically
-  " - allow user to set remote and other dynamic vars
   silent !clear
   write
 
-  let l:p_path      = expand('<sfile>:p:h')
   let l:remote      = "http://davidr.io/~drio/markdown/"
-  let l:converter   = "/Users/drio/dev/playground/md_to_html.py"
+  " FIXME: There has to be a better way
+  let l:converter   = split(&runtimepath, ",")[0] . "/bundle/vim-qmdown/plugin/md_to_html.py"
   let l:md_file     = expand("%")
   let l:extension   = expand("%:e")
   let l:html_file   = expand("%:r") . ".html"
@@ -21,7 +23,8 @@ function! QMD_main(task)
   endif
 
   if a:task == "open"
-    execute l:convert_cmd . ";open " . l:html_file
+    execute l:convert_cmd . ";open " . l:html_file .
+      \ ";echo " . "converter: " . l:converter
   endif
 
   if a:task == "rsync"
