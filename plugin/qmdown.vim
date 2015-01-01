@@ -3,6 +3,17 @@ if exists('g:loaded_quickmardown') || &cp
 endif
 let g:loaded_quickmardown = 1
 
+
+function! QMD_run(cmd)
+  if exists("g:loaded_dispatch") 
+    let b:dispatch = a:cmd
+    Dispatch
+  else
+    execute "!" . a:cmd
+  endif
+endfunction
+
+
 " grip the current file and open it in browser (open)
 function! QMD_main(task)
   silent !clear
@@ -14,23 +25,23 @@ function! QMD_main(task)
   let l:md_file     = expand("%")
   let l:extension   = expand("%:e")
   let l:html_file   = expand("%:r") . ".html"
-  let l:convert_cmd = "!" . l:converter . " " . l:md_file . " >" . l:html_file 
+  let l:convert_cmd = l:converter . " " . l:md_file . " >" . l:html_file 
   let l:bn_html     = substitute(expand("%:t"), "." . l:extension, ".html", "")
 
   " Always convert to html
   if a:task == "compile"
-    execute l:convert_cmd
+    call QMD_run(l:convert_cmd)
   endif
 
   if a:task == "open"
-    execute l:convert_cmd . ";open " . l:html_file
+    " let b:dispatch = l:convert_cmd . ";open " . l:html_file
+    " Dispatch
+    call QMD_run(l:convert_cmd . ";open " . l:html_file)
   endif
 
   if a:task == "rsync"
-    execute l:convert_cmd .
-      \ ";echo " . "extension: " . l:extension
-      \ ";echo " . "html file: " . l:html_file
-      \ ";scp " . l:html_file . " apu:public_html/markdown/"
+    let l:cmd = l:convert_cmd . ";scp " . l:html_file . " apu:public_html/markdown/"
+    call QMD_run(l:cmd)
   endif
 endfunction
 
