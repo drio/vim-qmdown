@@ -1,8 +1,6 @@
 qmdown (Quick Markdown)
 ---
 
-**Warning**: Still work in progress.
-
 In one sentence: Quickly render, view and sync up markdown from vim.
 
 I like using markdown when writing. And I do that in Vim. I wanted a way to
@@ -18,16 +16,14 @@ $ pip install markdown2
 ```
 
 This plugin fires up a shell command that runs the current markdown file
-against a python script that converts to html.
+against a python script that converts to html. The command would be run using
+[Dispatch](https://github.com/tpope/vim-dispatch) if available otherwise
+`execute` will be used (synchronously).
 
 
 TODO:
 ---
-  - find path to python script dynamically (DONE: sort of)
-  - allow user to set remote machine and other dynamic vars
-  - allow user to set `<leader>` key.
   - detect system and `open` accordingly
-  - document styles and python script
 
 
 Install
@@ -40,11 +36,19 @@ Assuming you are using pathoghen and vundle add this to your `.vimrc`:
 Usage
 ---
 
-- `<leader>mh` → generate html for current file (a <name>.html will be created)
-- `<leader>mo` → generate html and open (fires mac open)
-- `<leader>mr` → generate html and sync to remote server.
+Map some keys to fire up the different entry points to the plugin:
 
-For this last one you have to set up a remote machine and a remote directory.
-The markdown will be rsynced there. The plugin expects you have a passwordless
-setup against that server.
+To just generate html:
 
+`nnoremap <leader>mh :call QMD_main('compile')<CR>`
+
+To generate html and open in the current browser (osx):
+
+`nnoremap <leader>mo :call QMD_main('open')<CR>`
+
+To transfer the generated html to a remote server:
+
+`nnoremap <leader>mr :call QMD_main('rsync', 'apu:public_html/markdown')<CR>`
+
+For this last one, the second parameter is an ssh url that contains the 
+name of the hosts and the remote directory.
