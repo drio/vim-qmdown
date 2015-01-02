@@ -4,8 +4,8 @@ qmdown (Quick Markdown)
 In one sentence: Quickly render, view and sync up markdown from vim.
 
 I like using markdown when writing. And I do that in Vim. I wanted a way to
-quickly see the html results of my markdown. I also wanted to publish the
-results to my remote server for sharing. This simple vim plugin implements
+quickly see the html results of my markdown. I also wanted to publish them
+to my remote server for sharing. This simple vim plugin implements
 that.
 
 The conversion is done by a python script, you need python for this to work 
@@ -15,8 +15,8 @@ and `markdown2` has to be installed:
 $ pip install markdown2
 ```
 
-This plugin fires up a shell command that runs the current markdown file
-against a python script that converts to html. The command would be run using
+This plugin fires up a shell command that runs the current markdown against
+the python script that converts to html. The command would be run using
 [Dispatch](https://github.com/tpope/vim-dispatch) if available otherwise
 `execute` will be used (synchronously).
 
@@ -38,7 +38,7 @@ Usage
 
 Map some keys to fire up the different entry points to the plugin:
 
-To just generate html:
+To generate html:
 
 `nnoremap <leader>mh :call QMD_main('compile')<CR>`
 
