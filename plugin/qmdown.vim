@@ -6,7 +6,7 @@ let g:loaded_qmdown = 1
 
 function! QMD_run(cmd)
   silent exec "!" . a:cmd 
-  :redraw!
+  redraw!
 endfunction
 
 
