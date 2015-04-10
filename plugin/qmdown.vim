@@ -6,8 +6,7 @@ let g:loaded_qmdown = 1
 
 function! QMD_run(cmd)
   if exists("g:loaded_dispatch") 
-    let b:dispatch = a:cmd
-    Dispatch
+    Dispatch a:cmd
   else
     execute "!" . a:cmd
   endif
