@@ -5,11 +5,8 @@ let g:loaded_qmdown = 1
 
 
 function! QMD_run(cmd)
-  if exists("g:loaded_dispatch") 
-    Dispatch a:cmd
-  else
-    execute "!" . a:cmd
-  endif
+  silent exec "!" . a:cmd 
+  :redraw!
 endfunction
 
 
